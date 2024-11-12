@@ -285,7 +285,7 @@ conf_val2text_dict = {
     6: 'Medium'
 }
 # Use vectorized mapping to convert confidence values to text
-df_expanded['ComplexConfidence'] = df_expanded['ComplexConfidence'].map(conf_val2text_dict)
+df_expanded['Confidence'] = df_expanded['Confidence'].map(conf_val2text_dict)
 base_uniprot_url = 'https://www.uniprot.org/uniprotkb/'
 format_str = '{}{}/'
 df_expanded = df_expanded.assign(Link=base_uniprot_url + df_expanded['Uniprot_ACCs'])
@@ -307,7 +307,7 @@ df_expanded.to_csv(f'{search_term}_humap2_complexes{now.strftime("_%Y_%m_%d")}.t
 # #### Detailing all the complexes nicely
 #
 
-grouped = df_expanded.groupby(['HuMAP2_ID','ComplexConfidence'])
+grouped = df_expanded.groupby(['HuMAP2_ID','Confidence'])
 import datetime
 now = datetime.datetime.now()
 for complex, grouped_df in grouped:
